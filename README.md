@@ -33,15 +33,15 @@ maps pose sequences to engagement states.
 
 - `experiments/` — Jupyter notebooks (result processing, baseline vs proposed
   methods, t-test analysis)
-- `pose/` — pose-estimation backends (YOLO, MediaPipe, lightweight variants)
-- `features/` — keypoint feature engineering
-- `models/` — lightweight engagement classifier
-- `data/` — (not committed) raw and processed datasets
-- `results/` — (not committed) experiment outputs and metrics
+- `dataset/processed/` — cleaned dataframes (CSV feature data)
+- `dataset/results/` — compiled per-class result CSVs
+- `dataset/raw/` — (not committed) raw source dataset, kept private
 
-> Note: `data/` and `results/` are gitignored by design — the datasets contain
-> student-engagement recordings that stay private. Notebooks in `experiments/`
-> are committed with their cell outputs stripped for clean diffs.
+> Note: `dataset/raw/` is gitignored by design — it holds the raw
+> student-engagement recordings (`Dataset.zip`), which remain private; the
+> cleaned CSVs in `dataset/processed/` and `dataset/results/` are the public,
+> reproducible layer. Notebooks in `experiments/` are committed with their cell
+> outputs stripped for clean diffs.
 
 ## Thesis
 

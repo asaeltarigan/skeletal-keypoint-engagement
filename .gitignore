@@ -5,9 +5,9 @@ __pycache__/
 venv/
 .env
 
-# Heavy / sensitive data never committed
-data/
-results/
+# Heavy / sensitive data never committed — keep raw student-engagement
+# recordings (Dataset.zip) private; processed CSVs + results are public.
+dataset/raw/
 *.mp4
 *.avi
 *.mov

@@ -31,12 +31,17 @@ maps pose sequences to engagement states.
 
 ## Repository layout
 
+- `experiments/` — Jupyter notebooks (result processing, baseline vs proposed
+  methods, t-test analysis)
 - `pose/` — pose-estimation backends (YOLO, MediaPipe, lightweight variants)
 - `features/` — keypoint feature engineering
 - `models/` — lightweight engagement classifier
-- `experiments/` — evaluation runs and ablations
-- `data/` — (not committed) raw/preprocessed data
-- `results/` — (not committed) outputs and metrics
+- `data/` — (not committed) raw and processed datasets
+- `results/` — (not committed) experiment outputs and metrics
+
+> Note: `data/` and `results/` are gitignored by design — the datasets contain
+> student-engagement recordings that stay private. Notebooks in `experiments/`
+> are committed with their cell outputs stripped for clean diffs.
 
 ## Thesis
 

@@ -1,28 +1,41 @@
-# Skeletal Keypoint Engagement Detection
+# Lighter Student Engagement Recognition Using Skeletal Keypoints
 
-Master's thesis code — detecting student engagement from skeletal keypoints
-extracted with pose estimation, classified with lightweight machine learning.
+Code for the paper **"Lighter Student Engagement Recognition in a Classroom
+Environment Using Skeletal Keypoints"** — detecting student engagement from
+skeletal keypoints extracted with object detection + pose estimation, and
+classified with lightweight machine learning.
+
+## Publication
+
+> Gabriel Asael Tarigan, Gregorius Natanael Elwirehardja, Kuncahyo Setyo Nugroho,
+> and Bens Pardamean. "Lighter Student Engagement Recognition in a Classroom
+> Environment Using Skeletal Keypoints." *IAENG International Journal of Computer
+> Science*, vol. 52, no. 6, June 2025, pp. 1997-2014.
 
 ## Approach
 
 ```
-Raw video → pose estimation → skeleton keypoints → lightweight ML classifier → engagement label
+Raw video → person detection + pose estimation → skeleton keypoints → lightweight ML classifier → engagement label
 ```
 
-The pipeline compares several pose-estimation backends and keeps the total
-stack light enough to run in real time on modest hardware.
+The proposed method combines **YOLOv8m** for object (person) detection with
+**MediaPipe** for skeletal keypoint estimation as state-of-the-art
+alternatives, outperforming the baseline **YOLOv4 + OpenPose**:
+
+| Metric | Proposed (YOLOv8m + MediaPipe) | Baseline (YOLOv4 + OpenPose) |
+|---|---|---|
+| Accuracy (test set) | **0.70** | 0.41 |
+| Cross-entropy loss (test set) | **0.40** | 0.60 |
+| Pose-detection data collection speed | **~16x faster** | 1x |
+
+The accuracy and loss gains are confirmed by a statistically significant paired
+t-test. Despite not being designed for it, the proposed method achieves multiple
+keypoint detection matching the baseline's amount.
 
 ## Pose estimation
 
-Multiple pose backends are evaluated, so the whole pipeline can run fast and
-reproducibly:
-
-- **YOLO** — person detection, providing the input crop before keypoints are
-  extracted
-- **MediaPipe** — skeletal keypoint extraction (landmark tracking)
-- **Lighter pose models** — e.g. MoveNet / YOLOv8-pose (light) as faster
-  alternatives to MediaPipe/BlazePose, to reduce latency on long classroom
-  footage
+- **YOLOv8m** — person (object) detection
+- **MediaPipe** — skeletal keypoint extraction / pose estimation
 
 ## Classification
 
@@ -33,6 +46,7 @@ maps pose sequences to engagement states.
 
 - `experiments/` — Jupyter notebooks (result processing, baseline vs proposed
   methods, t-test analysis)
+- `papers/` — the published IJCS paper (PDF)
 - `dataset/processed/` — cleaned dataframes (CSV feature data)
 - `dataset/results/` — compiled per-class result CSVs
 - `dataset/raw/` — (not committed) raw source dataset, kept private
@@ -43,10 +57,10 @@ maps pose sequences to engagement states.
 > reproducible layer. Notebooks in `experiments/` are committed with their cell
 > outputs stripped for clean diffs.
 
-## Thesis
+## Dataset
 
-This repository accompanies the skeletal-keypoint engagement line published
-across IAENG IJCS (2025), CMBiN (2026), and ICORIS (2025).
+The pose-coordinate dataset used in the paper is available separately:
+`github.com/asaeltarigan/pose_coordinate`.
 
 ## Author
 
